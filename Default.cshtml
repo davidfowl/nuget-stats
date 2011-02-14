@@ -21,10 +21,10 @@
             }
 
             function update(element, value) {
-                var currentValue = parseInt($('#' + element).html())
+                var currentValue = $('#' + element).html();
 
                 if (currentValue != value) {
-                    $('#' + element).html(value).hide().fadeIn('slow')
+                    $('#' + element).html(value).hide().fadeIn('slow');
                 }
             }
 
@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<div style="margin-left:20%">
+<div style="margin-left:15%">
     <div id="left">
         <table id="stats">
             <tr>

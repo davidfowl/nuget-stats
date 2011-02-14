@@ -10,8 +10,8 @@
     }
 
     Response.Write(Json.Encode(new {
-        TotalCount = packages.Count,
-        UniqueCount = packages.GroupBy(p => p.Id).Count(),
-        TotalDownloads = packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum(),
+        TotalCount = String.Format("{0:0,0}", packages.Count),
+        UniqueCount = String.Format("{0:0,0}", packages.GroupBy(p => p.Id).Count()),
+        TotalDownloads = String.Format("{0:0,0}", packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum()),
     }));
 }
