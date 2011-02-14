@@ -1,13 +1,5 @@
-﻿@using NuGet
-@{    
-    var packages = (IList<IPackage>)Cache.Get("packages");
-
-    if (packages == null) {
-        var repo = new DataServicePackageRepository(new Uri("http://packages.nuget.org/v1/FeedService.svc"));
-        packages = repo.GetPackages().ToList();
-
-        Cache.Insert("packages", packages, null, DateTime.Now + TimeSpan.FromSeconds(10), System.Web.Caching.Cache.NoSlidingExpiration);
-    }
+﻿@{
+    var packages = PackageRepository.GetPackages(Cache);
 
     Response.Write(Json.Encode(new {
         TotalCount = String.Format("{0:0,0}", packages.Count),
