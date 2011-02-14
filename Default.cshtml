@@ -1,9 +1,12 @@
 ﻿@using Microsoft.Web.Helpers
+
 @{
     Layout = "_Layout.cshtml";
+    Page.Title = "NuGet Statistics";
+    Page.Description = "Displays statistics about the official NuGet gallery.";
 }
     
-@section script {
+@section head {
     <script type="text/javascript">
         $(function () {
             function getStats() {
@@ -34,7 +37,7 @@
 }
 
 <div id="header">
-    <a href="http://nuget.org"><img id="logo" src="http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=nuget&DownloadId=162974&Build=17601" alt="NuGet Logo" /></a>
+    <a href="http://nuget.org"><img id="logo" src="@Href("nuget-logo.png")" alt="NuGet Logo" /></a>
     <span id="header-text">statistics</span>
     <div class="clear">
     </div>
