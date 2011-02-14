@@ -1,11 +1,15 @@
 ﻿@using NuGet
+@{    
+    var packages = (IList<IPackage>)Cache.Get("packages");
 
-@{
-    var repo = new DataServicePackageRepository(new Uri("http://packages.nuget.org/v1/FeedService.svc"));    
-    var packages = repo.GetPackages().ToList();
+    if (packages == null) {
+        var repo = new DataServicePackageRepository(new Uri("http://packages.nuget.org/v1/FeedService.svc"));
+        packages = repo.GetPackages().ToList();
 
-    Response.Write(Json.Encode(new
-    {
+        Cache.Insert("packages", packages, null, DateTime.Now + TimeSpan.FromSeconds(10), System.Web.Caching.Cache.NoSlidingExpiration);
+    }
+
+    Response.Write(Json.Encode(new {
         TotalCount = packages.Count,
         UniqueCount = packages.GroupBy(p => p.Id).Count(),
         TotalDownloads = packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum(),
