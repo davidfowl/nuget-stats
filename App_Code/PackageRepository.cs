@@ -24,7 +24,7 @@ public class PackageRepository {
                     cache.Insert("packages", 
                                   packages, 
                                   null, 
-                                  DateTime.Now + TimeSpan.FromSeconds(30), 
+                                  DateTime.Now + TimeSpan.FromSeconds(20), 
                                   Cache.NoSlidingExpiration);
                 }
             }
