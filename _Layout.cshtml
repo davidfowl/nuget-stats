@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        <link href="@Href("Site.css")" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.4.4.min.js" type="text/javascript"></script>
+        @RenderSection("script", required: false)
+    </head>
+
+    <body>
+        @RenderBody()
+    </body>    
+</html>

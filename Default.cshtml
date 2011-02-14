@@ -1,0 +1,81 @@
+﻿@using Microsoft.Web.Helpers
+@{
+    Layout = "_Layout.cshtml";
+}
+    
+@section script {
+    <script type="text/javascript">
+        $(function () {
+            function getStats() {
+                $.post('stats', {}, function (stats) {
+                    $('#loading').fadeOut('slow');
+                    $('#stats').fadeIn('slow');
+
+                    update('downloads', stats.TotalDownloads);
+                    update('unique', stats.UniqueCount);
+                    update('total', stats.TotalCount);
+
+                    setTimeout(getStats, 500);
+
+                }, 'json');
+            }
+
+            function update(element, value) {
+                var currentValue = parseInt($('#' + element).html())
+
+                if (currentValue != value) {
+                    $('#' + element).html(value).hide().fadeIn('slow')
+                }
+            }
+
+            getStats();
+        });
+    </script>
+}
+
+<div id="header">
+    <img id="logo" src="http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=nuget&DownloadId=162974&Build=17601" alt="NuGet Logo" />
+    <span id="header-text">statistics</span>
+    <div class="clear">
+    </div>
+
+    <div id="loading">
+        <img src="@Href("loading.gif")" alt="Loading" />
+        <span class="loading">Populating...</span>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div style="margin-left:20%">
+    <div id="left">
+        <table id="stats">
+            <tr>
+                <td id="downloads">
+                </td>
+                <td class="words">
+                    downloads.
+                </td>
+            </tr>
+            <tr>
+                <td id="unique">
+                </td>
+                <td class="words">
+                    unique packages.
+                </td>
+            </tr>
+            <tr>
+                <td id="total">
+                </td>
+                <td class="words">
+                    total packages.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="right">
+        @Twitter.Search("#nuget")
+    </div>
+
+</div>
