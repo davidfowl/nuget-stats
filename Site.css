@@ -132,3 +132,8 @@ textarea
 {
     clear:both;
 }
+
+a img 
+{
+    border:0;
+}
