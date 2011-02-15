@@ -1,9 +1,14 @@
-﻿@{
+﻿@functions {
+    string GetDetailsUrl(Uri uri) {
+        // The official feed has a bug where the url contains a reference to localhost.
+        // This is a temporary workaround.
+        return uri.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
+    }
+}
+
+@{
     var packages = PackageRepository.GetPackages(Cache);
-    
-    // REVIEW: Update this when the format changes
-    const string nugetOrgUrlFormat = "http://nuget.org/Packages/Packages/Details/{0}-{1}";
-    
+
     Response.Write(Json.Encode(new {
         TotalCount = String.Format("{0:0,0}", packages.Count),
         UniqueCount = String.Format("{0:0,0}", packages.GroupBy(p => p.Id).Count()),
@@ -13,7 +18,7 @@
                           select new {
                               Id = p.Id,
                               Version = p.Version.ToString(),
-                              Url = String.Format(nugetOrgUrlFormat, p.Title, p.Version.ToString().Replace('.', '-'))
+                              Url = GetDetailsUrl(p.GalleryDetailsUrl)
                           }).Take(5)
     }));
 }
