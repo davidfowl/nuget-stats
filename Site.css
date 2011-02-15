@@ -152,13 +152,14 @@ a img
 #bottom a
 {
     padding: 5px;
+    font-size:12px;
     font-weight: bold;
     display: block;
     width: 300px;
     border: 1px solid #ccc;
     padding: 5px;
     margin-bottom: 2%;
-    height: 25px;
+    height: 25px;    
 }
 
 #middle
