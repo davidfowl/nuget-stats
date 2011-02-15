@@ -1,6 +1,6 @@
 body
 {
-    font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
+    font-family: Verdana, Tahoma, Arial, "Helvetica Neue" , Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
 }
@@ -8,32 +8,32 @@ body
 /* Styles for basic forms
 -----------------------------------------------------------*/
 
-fieldset 
+fieldset
 {
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
 }
 
-legend 
+legend
 {
-    font-size:1.2em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
-textarea 
+textarea
 {
     min-height: 75px;
 }
 
-.editor-label 
+.editor-label
 {
     margin: 1em 0 0 0;
 }
 
-.editor-field 
+.editor-field
 {
-    margin:0.5em 0 0 0;
+    margin: 0.5em 0 0 0;
 }
 
 
@@ -66,74 +66,121 @@ textarea
     display: none;
 }
 
-#downloads, #unique, #total 
+#downloads, #unique, #total
 {
-    font-size:72px;
-    font-weight:bold;
-    text-align:right;
+    font-size: 72px;
+    font-weight: bold;
+    text-align: right;
 }
 
-#stats 
+#stats
 {
-    display:none;
+    display: none;
 }
 
 #stats td
 {
-    padding:3px;
+    padding: 3px;
 }
 
-.words 
+.words
 {
-    font-size:15px;
+    font-size: 15px;
 }
 
-#header 
+#header
 {
-    margin-left:30%;
-    margin-bottom:2%;
+    margin-left: 30%;
+    margin-bottom: 2%;
 }
 
-#header-text 
+#header-text
 {
-    font-size:20px;
-    font-weight:bold;
-    float:left;
-    margin-top:20px;
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    margin-top: 20px;
 }
 
-#loading 
+#loading
 {
-    margin-top:20px;
-    margin-left:15%;
-    font-size:15px;
-    font-weight:bold;
+    float: left;
+    margin-top: 23px;
+    margin-left: 2%;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-#logo 
+#logo
 {
-    float:left;
+    float: left;
 }
 
-#left 
+#left
 {
-    height:300px;
-    width:525px;
-    float:left;
+    height: 300px;
+    width: 525px;
+    float: left;
+    margin-left: 20%;
 }
 
-#right 
+#right
 {
-    float:left;
-    height:300px;
+    float: right;
+    height: 300px;
 }
 
-.clear 
+.clear
 {
-    clear:both;
+    clear: both;
 }
 
-a img 
+a img
 {
-    border:0;
+    border: 0;
+}
+
+#bottom
+{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    text-align: center;
+}
+
+#bottom a
+{
+    padding: 5px;
+    font-weight: bold;
+    display: block;
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 2%;
+    height: 25px;
+}
+
+#middle
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+#bottom a:link
+{
+    color: #000;
+    text-decoration: none;
+}
+
+#bottom a:visited
+{
+    color: #000;
+    text-decoration: none;
+}
+
+#bottom a:hover
+{
+    border: 1px solid #000;
 }
