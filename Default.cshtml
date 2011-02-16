@@ -12,44 +12,44 @@
 }
 
 <div id="header">
-    
+    <a href="http://nuget.org"><img id="logo" src="@Href("nuget-logo.png")" alt="NuGet Logo" /></a>
+    <span id="header-text">statistics</span>    
 </div>
 
 <div class="clear"></div>
 
-<div id="middle">
+<div id="loading">
+    <img src="loading.gif" alt="Loading" />
+    <span class="loading">Populating...</span>
+</div>
+<div id="main">
+    <table id="stats" align="center">
+        <tr>
+            <td id="downloads" class="counter"></td>
+            <td class="words">downloads.</td>
+        </tr>
+        <tr>
+            <td id="unique" class="counter"></td>
+            <td class="words">unique packages.</td>
+        </tr>
+        <tr>
+            <td id="total" class="counter"></td>
+            <td class="words">total packages.</td>
+        </tr>
+    </table>
+    <br />
+    <br />
     <div id="left">
-        <table id="stats">
-            <tr>
-                <td id="downloads" class="counter"></td>
-                <td class="words">downloads.</td>
-            </tr>
-            <tr>
-                <td id="unique" class="counter"></td>
-                <td class="words">unique packages.</td>
-            </tr>
-            <tr>
-                <td id="total" class="counter"></td>
-                <td class="words">total packages.</td>
-            </tr>
-        </table>
-    </div>
+        <h3>
+            Just Updated
+        </h3>
+        <ul id="recent">
 
+        </ul>
+    </div>
     <div id="right">
-        
+        @Twitter.Search("#nuget")
     </div>
-</div>
-
-<div class="clear"></div>
-
-
-<div id="recent">
-    <h3>
-        Just Updated
-    </h3>
-    <ul>
-
-    </ul>
-
+   <div class="clear"></div>
    
 </div>
