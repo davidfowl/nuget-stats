@@ -122,7 +122,6 @@ textarea
 #left
 {
     float: left;
-    min-height: 300px;
     width: 45%;
     margin-left: 5%;
 }
@@ -143,18 +142,23 @@ a img
     border: 0;
 }
 
-#recent
+#recent 
+{
+    margin-top: 10px;
+}
+
+#recent ul
 {
     list-style-type: none;
     margin-left: 0px;
     padding-left: 0px;
+    text-align: left;
 }
 
 #recent li 
 {
-    margin-bottom: 20px;
+    margin: auto auto 20px 0;
     pading-left: 0px;
-    margin-left: 0px;
 }
 
 #recent a, #recent a:visited, #recent a:active
@@ -163,12 +167,11 @@ a img
     text-decoration: none;
 }
 
-
 #main
 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
+    margin: auto;
+    padding: 20px;
+    width: 1000px;
     background-color: rgb(249, 249, 249);
     display: none;
 }

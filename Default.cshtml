@@ -23,33 +23,33 @@
     <span class="loading">Populating...</span>
 </div>
 <div id="main">
-    <table id="stats" align="center">
-        <tr>
-            <td id="downloads" class="counter"></td>
-            <td class="words">downloads.</td>
-        </tr>
-        <tr>
-            <td id="unique" class="counter"></td>
-            <td class="words">unique packages.</td>
-        </tr>
-        <tr>
-            <td id="total" class="counter"></td>
-            <td class="words">total packages.</td>
-        </tr>
-    </table>
-    <br />
-    <br />
     <div id="left">
+        <table id="stats">
+            <tr>
+                <td id="downloads" class="counter"></td>
+                <td class="words">downloads.</td>
+            </tr>
+            <tr>
+                <td id="unique" class="counter"></td>
+                <td class="words">unique packages.</td>
+            </tr>
+            <tr>
+                <td id="total" class="counter"></td>
+                <td class="words">total packages.</td>
+            </tr>
+        </table>
+    </div>
+    <div id="right">
+        @Twitter.Search("#nuget", height: 200)
+    </div>
+    <div class="clear"></div>
+    
+    <div id="recent">
         <h3>
             Just Updated
         </h3>
-        <ul id="recent">
+        <ul>
 
         </ul>
     </div>
-    <div id="right">
-        @Twitter.Search("#nuget")
-    </div>
-   <div class="clear"></div>
-   
 </div>

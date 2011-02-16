@@ -8,7 +8,7 @@
             update('unique', stats.UniqueCount);
             update('total', stats.TotalCount);
 
-            var recent = $('#recent').html('');
+            var recent = $('#recent ul').html('');
             $.each(stats.LatestPackages, function (i) {
                 var value = this.Id + " (" + this.Version + ")";
                 recent.append('<li><a href="' + this.Url + '"><strong>' + this.Id + ' (' + this.Version + ')</strong></a><br />' + this.Desc + '</li>');
