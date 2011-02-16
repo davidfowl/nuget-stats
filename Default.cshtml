@@ -7,51 +7,12 @@
 }
     
 @section head {
-    <script type="text/javascript">
-        $(function () {
-            function getStats() {
-                $.post('stats', {}, function (stats) {
-                    $('#loading').fadeOut('slow');
-                    $('#stats').fadeIn('slow');
-                    $('#bottom').fadeIn('slow')
-
-                    update('downloads', stats.TotalDownloads);
-                    update('unique', stats.UniqueCount);
-                    update('total', stats.TotalCount);
-
-                    for (var i = 0; i < stats.LatestPackages.length; i++) {
-                        var value = stats.LatestPackages[i].Id + " (" + stats.LatestPackages[i].Version + ")";
-                        update('p' + i, value);
-                        $('#p' + i).attr('href', stats.LatestPackages[i].Url);
-                    }
-
-                    setTimeout(getStats, 1000);
-
-                }, 'json');
-            }
-
-            function update(element, value) {
-                var currentValue = $('#' + element).html();
-
-                if (currentValue != value) {
-                    $('#' + element).html(value).hide().fadeIn('slow');
-                }
-            }
-
-            getStats();
-        });
-    </script>
-
+    <script type="text/javascript" src="Default.js"></script>
     @Analytics.GetGoogleHtml("UA-4117493-3")
 }
 
 <div id="header">
-    <a href="http://nuget.org"><img id="logo" src="@Href("nuget-logo.png")" alt="NuGet Logo" /></a>
-    <span id="header-text">statistics</span>    
-    <div id="loading">
-        <img src="@Href("loading.gif")" alt="Loading" />
-        <span class="loading">Populating...</span>
-    </div>
+    
 </div>
 
 <div class="clear"></div>
@@ -60,44 +21,35 @@
     <div id="left">
         <table id="stats">
             <tr>
-                <td id="downloads">
-                </td>
-                <td class="words">
-                    downloads.
-                </td>
+                <td id="downloads" class="counter"></td>
+                <td class="words">downloads.</td>
             </tr>
             <tr>
-                <td id="unique">
-                </td>
-                <td class="words">
-                    unique packages.
-                </td>
+                <td id="unique" class="counter"></td>
+                <td class="words">unique packages.</td>
             </tr>
             <tr>
-                <td id="total">
-                </td>
-                <td class="words">
-                    total packages.
-                </td>
+                <td id="total" class="counter"></td>
+                <td class="words">total packages.</td>
             </tr>
         </table>
     </div>
 
     <div id="right">
-        @Twitter.Search("#nuget")
+        
     </div>
 </div>
 
 <div class="clear"></div>
 
 
-<div id="bottom">
+<div id="recent">
     <h3>
         Just Updated
     </h3>
-    <a id="p0" />
-    <a id="p1" />
-    <a id="p2" />
-    <a id="p3" />
-    <a id="p4" />
+    <ul>
+
+    </ul>
+
+   
 </div>

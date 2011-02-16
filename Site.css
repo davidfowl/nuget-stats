@@ -66,17 +66,19 @@ textarea
     display: none;
 }
 
-#downloads, #unique, #total
+.counter
 {
     font-size: 72px;
     font-weight: bold;
     text-align: right;
+    overflow: hidden;
 }
 
-#stats
-{
-    display: none;
+.counter > span{
+    position: relative;
+    padding: 2px;
 }
+
 
 #stats td
 {
@@ -86,6 +88,8 @@ textarea
 .words
 {
     font-size: 15px;
+    margin-top: 54px;
+    float: left;
 }
 
 #header
@@ -104,11 +108,10 @@ textarea
 
 #loading
 {
-    float: left;
-    margin-top: 23px;
-    margin-left: 2%;
+    margin: 150px auto auto;
     font-size: 15px;
     font-weight: bold;
+    width: 600px;
 }
 
 #logo
@@ -118,16 +121,16 @@ textarea
 
 #left
 {
-    height: 300px;
-    width: 525px;
     float: left;
-    margin-left: 20%;
+    min-height: 300px;
+    width: 45%;
+    margin-left: 5%;
 }
 
 #right
 {
     float: right;
-    height: 300px;
+    margin-right: 5%;
 }
 
 .clear
@@ -140,48 +143,32 @@ a img
     border: 0;
 }
 
-#bottom
+#recent
 {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#recent li 
+{
+    margin-bottom: 20px;
+    pading-left: 0px;
+    margin-left: 0px;
+}
+
+#recent a, #recent a:visited, #recent a:active
+{
+    color: Blue;
+    text-decoration: none;
+}
+
+
+#main
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    background-color: rgb(249, 249, 249);
     display: none;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;
-    text-align: center;
-}
-
-#bottom a
-{
-    padding: 5px;
-    font-size:12px;
-    font-weight: bold;
-    display: block;
-    width: 300px;
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin-bottom: 2%;
-    height: 25px;    
-}
-
-#middle
-{
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-}
-
-#bottom a:link
-{
-    color: #000;
-    text-decoration: none;
-}
-
-#bottom a:visited
-{
-    color: #000;
-    text-decoration: none;
-}
-
-#bottom a:hover
-{
-    border: 1px solid #000;
 }

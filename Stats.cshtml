@@ -18,7 +18,8 @@
                           select new {
                               Id = p.Id,
                               Version = p.Version.ToString(),
-                              Url = GetDetailsUrl(p.GalleryDetailsUrl)
+                              Url = GetDetailsUrl(p.GalleryDetailsUrl),
+                              Desc = p.Description
                           }).Take(5)
     }));
 }
