@@ -11,7 +11,7 @@
             var recent = $('#recent ul').html('');
             $.each(stats.LatestPackages, function (i) {
                 var value = this.Id + " (" + this.Version + ")";
-                recent.append('<li><a href="' + this.Url + '"><strong>' + this.Id + ' (' + this.Version + ')</strong></a><br />' + this.Desc + '</li>');
+                recent.append('<li><a href="' + this.Url + '"><strong>' + this.Id + ' (' + this.Version + ')</strong></a></li>');
             });
 
             $('#loading').hide();
@@ -36,9 +36,7 @@
                 }
             });
             for (var i = diff - 1; i >= 0; i--) {
-                var el = $('<span></span>');
-                $('#' + element).prepend(el);
-                animateEl(el, value.charAt(i));
+                $('#' + element).prepend('<span>' + value.charAt(i) + '</span>');
             }
         }
 

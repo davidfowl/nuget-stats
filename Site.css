@@ -1,80 +1,58 @@
 body
 {
     font-family: Verdana, Tahoma, Arial, "Helvetica Neue" , Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+    background-color: #F3F3F3;
 }
 
-/* Styles for basic forms
------------------------------------------------------------*/
-
-fieldset
+#header
 {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+    margin: auto;
+    width: 350px;
 }
 
-legend
+#header-text
 {
-    font-size: 1.2em;
+    float: left;
+    font-size: 20px;
     font-weight: bold;
+    margin: 22px auto auto 5px;
 }
 
-textarea
+
+#content 
 {
-    min-height: 75px;
+    margin: 20px auto auto;
+    width: 1000px;
 }
 
-.editor-label
-{
-    margin: 1em 0 0 0;
-}
-
-.editor-field
-{
-    margin: 0.5em 0 0 0;
-}
-
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error
-{
-    color: #ff0000;
-}
-
-.field-validation-valid
+#main
 {
     display: none;
+    border: 1px solid rgb(79, 163, 182);
 }
 
-.input-validation-error
+.counters 
 {
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
+    background-color: rgb(79, 163, 182);
+    color: #FFF;
+    padding: 5px;
+    margin-bottom: 15px;
 }
 
-.validation-summary-errors
+.counter 
 {
-    font-weight: bold;
-    color: #ff0000;
+    float: left;
+    text-align: center;
 }
 
-.validation-summary-valid
+.counter > div
 {
-    display: none;
-}
-
-.counter
-{
-    font-size: 72px;
-    font-weight: bold;
-    text-align: right;
+    font-size: 34px;
     overflow: hidden;
 }
 
-.counter > span{
+.counter > div > span
+{
     position: relative;
     padding: 2px;
 }
@@ -88,30 +66,17 @@ textarea
 .words
 {
     font-size: 15px;
-    margin-top: 54px;
-    float: left;
+    vertical-align: bottom;
 }
 
-#header
-{
-    margin-left: 30%;
-    margin-bottom: 2%;
-}
-
-#header-text
-{
-    font-size: 20px;
-    font-weight: bold;
-    float: left;
-    margin-top: 20px;
-}
 
 #loading
 {
-    margin: 150px auto auto;
+    margin: 30px auto auto;
     font-size: 15px;
     font-weight: bold;
     width: 600px;
+    text-align: center;
 }
 
 #logo
@@ -119,17 +84,17 @@ textarea
     float: left;
 }
 
-#left
+.left
 {
     float: left;
-    width: 45%;
-    margin-left: 5%;
+    width: 60%;
+    margin-left: 10px;
 }
 
-#right
+.right
 {
     float: right;
-    margin-right: 5%;
+    margin-right: 10px;
 }
 
 .clear
@@ -142,20 +107,14 @@ a img
     border: 0;
 }
 
-#recent 
-{
-    margin-top: 10px;
-}
-
 #recent ul
 {
     list-style-type: none;
-    margin-left: 0px;
     padding-left: 0px;
     text-align: left;
 }
 
-#recent li 
+#recent li
 {
     margin: auto auto 20px 0;
     pading-left: 0px;
@@ -167,11 +126,3 @@ a img
     text-decoration: none;
 }
 
-#main
-{
-    margin: auto;
-    padding: 20px;
-    width: 1000px;
-    background-color: rgb(249, 249, 249);
-    display: none;
-}
