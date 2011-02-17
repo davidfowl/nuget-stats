@@ -20,9 +20,10 @@ public static class NuGetStatistics {
         }
     }
 
-    public static IEnumerable<dynamic> GetStatistics() {
+    public static IEnumerable<dynamic> GetStatistics(int total = 10) {
+        total = Math.Min(total, 10000);
         using (var db = Database.Open("Stats")) {
-            return db.Query("Select top 10 * from Stats order by LogTime desc");
+            return db.Query("Select top "+ total + " * from Stats order by LogTime desc");
         }
     }
 }

@@ -12,7 +12,7 @@
 }
 
 <div id="header">
-    <a href="http://nuget.org"><img id="logo" src="@Href("nuget-logo.png")" alt="NuGet Logo" /></a>
+    <a href="http://nuget.org"><img id="logo" src="nuget-logo.png" alt="NuGet Logo" class="left" /></a>
     <span id="header-text">statistics</span>    
 </div>
 
@@ -40,9 +40,8 @@
             </div>
             <div class="clear"></div>
         </div>
-    
-    
-        <div id="recent" class="left">
+        <img id="chart" src="ViewStats.cshtml" alt="NuGet downloads" /> 
+        <div id="recent">
             <h3>
                 Recently Updated 
             </h3>
@@ -50,7 +49,8 @@
 
             </ul>
         </div>
-        <div class="right">
+        
+        <div id="twitter">
             @Twitter.Search("#nuget", height: 250)
         </div>
         <div class="clear"></div>
