@@ -1,6 +1,6 @@
 ﻿$(function () {
     function getStats() {
-        $.get('stats', function (stats) {             
+        $.get('stats', function (stats) {
             update('downloads', stats.TotalDownloads);
             update('unique', stats.UniqueCount);
             update('total', stats.TotalCount);
@@ -12,7 +12,7 @@
             });
 
             $('#loading').hide();
-            $('#main').show();
+            $('#main').fadeIn('slow');
 
             setTimeout(getStats, 5000);
         }, 'json');

@@ -1,25 +1,12 @@
-﻿@functions {
-    string GetDetailsUrl(Uri uri) {
-        // The official feed has a bug where the url contains a reference to localhost.
-        // This is a temporary workaround.
-        return uri.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
-    }
-}
-
-@{
-    var packages = PackageRepository.GetPackages(Cache);
+﻿@{
+    NuGetStatistics.Update(Cache);
+    
+    var stats = PackageRepository.GetCurrentStatistics(Cache);
 
     Response.Write(Json.Encode(new {
-        TotalCount = String.Format("{0:0,0}", packages.Count),
-        UniqueCount = String.Format("{0:0,0}", packages.GroupBy(p => p.Id).Count()),
-        TotalDownloads = String.Format("{0:0,0}", packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum()),
-        LatestPackages = (from p in packages
-                          orderby p.LastUpdated descending
-                          select new {
-                              Id = p.Id,
-                              Version = p.Version.ToString(),
-                              Url = GetDetailsUrl(p.GalleryDetailsUrl),
-                              Desc = p.Description
-                          }).Take(5)
+        TotalCount = String.Format("{0:0,0}", stats.TotalCount),
+        UniqueCount = String.Format("{0:0,0}", stats.UniqueCount),
+        TotalDownloads = String.Format("{0:0,0}", stats.TotalDownloads),
+        LatestPackages = stats.LatestPackages
     }));
 }

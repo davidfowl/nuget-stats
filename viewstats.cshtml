@@ -1,0 +1,8 @@
+﻿@{       
+    // Testing page to look at the current stats
+    var stats = NuGetStatistics.GetStatistics();
+    
+    var grid = new WebGrid(stats);
+    
+    @grid.GetHtml() 
+}
