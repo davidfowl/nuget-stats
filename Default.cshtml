@@ -5,55 +5,35 @@
     Page.Title = "NuGet Statistics";
     Page.Description = "Displays statistics about the official NuGet gallery.";
 }
-    
-@section head {
+ 
+    <div id="page">
+        <div id="title">
+            <a href="/"><img src="@Href("nuget-logo.png")" class="logo" alt="NuGet" /></a>
+            <h1>Statistics</h1>
+        </div>
+        
+        <div id="body">
+            <div id="main">
+                <div id="stats">
+                    <span class="stat" id="stat-1"><span class="num" id="unique"> </span>unique packages</span>
+                    <span class="stat" id="stat-2"><span class="num" id="downloads"> </span>downloads</span>
+                    <span class="stat" id="stat-3"><span class="num" id="total"> </span>total packages</span>
+                </div>
+                
+                <div id="recent">
+                    <h2>Just Updated</h2>
+                    <ul> </ul>
+                </div>
+                
+                <div id="tweets">
+                    @Twitter.Search("#nuget", 287, 200)
+                </div>
+            </div>
+            <div id="loading"> </div>
+        </div>
+    </div>
+
+@section foot {
     <script type="text/javascript" src="Default.js"></script>
     @Analytics.GetGoogleHtml("UA-4117493-3")
 }
-
-<div id="header">
-    <a href="http://nuget.org"><img id="logo" src="@Href("nuget-logo.png")" alt="NuGet Logo" /></a>
-    <span id="header-text">statistics</span>    
-</div>
-
-<div class="clear"></div>
-
-<div id="content">
-
-    <div id="loading">
-        <img src="loading.gif" alt="Loading" />
-        <span class="loading">Populating...</span>
-    </div>
-    <div id="main">
-        <div class="counters">            
-            <div class="counter" style="width: 25%">
-                <div id="total"></div>
-                <span class="words">total packages.</span>
-            </div>
-            <div class="counter" style="width: 50%">
-                <div id="downloads"></div>
-                <span class="words">package downloads.</span>
-            </div>
-            <div class="counter" style="width: 25%">
-                <div id="unique"></div>
-                <span class="words">unqiue packages.</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-    
-    
-        <div id="recent" class="left">
-            <h3>
-                Recently Updated 
-            </h3>
-            <ul>
-
-            </ul>
-        </div>
-        <div class="right">
-            @Twitter.Search("#nuget", height: 250)
-        </div>
-        <div class="clear"></div>
-        <br />
-    </div>
-</div>

@@ -1,127 +1,109 @@
-﻿body
-{
-    font-family: Verdana, Tahoma, Arial, "Helvetica Neue" , Helvetica, Sans-Serif;
+﻿@import url('Reset.css');
+
+body {
+    font: 14px Helvetica Neue, Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
+    background: #004EAE;
+    margin: 8px;
 }
 
-#header
-{
-    margin: auto;
-    width: 350px;
+#page {
+    width: 960px;
+    margin: 0px auto;    
+    background: white;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 4px 10px 2px #05005F;
+    -moz-box-shadow: 0 4px 10px 2px #05005F;
 }
 
-#header-text
-{
-    float: left;
-    font-size: 20px;
+#main { display: none; }
+#loading {
+    background: url(/loading.gif) no-repeat center center;
+    height: 300px;
+}
+
+a { color: #00A0E7; }
+
+#title {
+    height: 64px;    
+}
+    
+    #title .logo {
+        float: left;
+    }
+    
+    #title h1 {
+        margin: 0;
+        font-size: 3.7em;
+        padding-top: 2px;
+        color: #888;
+        font-style: italic;
+    } 
+
+#stats {
+    box-shadow: inset 0 4px 8px #000;
+    -moz-box-shadow: inset 0 4px 8px #000;
+    background: #555;    
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    margin: 0 0 1em 0;
+    padding: 8px;
+}
+    
+#stats .stat {
+    display: inline-block;
+    *zoom: 1;
+    color: #bbb;
     font-weight: bold;
-    margin: 22px auto auto 5px;
-}
-
-
-#content 
-{
-    margin: 20px auto auto;
-    width: 1000px;
-}
-
-#main
-{
-    display: none;
-    border: 1px solid rgb(79, 163, 182);
-}
-
-.counters 
-{
-    background-color: rgb(79, 163, 182);
-    color: #FFF;
-    padding: 5px;
-    margin-bottom: 15px;
-}
-
-.counter 
-{
-    float: left;
     text-align: center;
+    padding: 0.5em 0;
+    width: 33%;
+} 
+
+#stats .num {
+    font-size: 4em;
+    color: #f9f9f9;
+    font-family: monospace;
+    display: block;
+    line-height: 0.9em;
+    text-shadow: 0 2px 1px black;
 }
 
-.counter > div
-{
-    font-size: 34px;
+#tweets {
+    width: 287px;
+    display: inline-block;
+    *zoom: 1;
+    vertical-align: top; 
     overflow: hidden;
 }
 
-.counter > div > span
-{
-    position: relative;
-    padding: 2px;
+#recent {
+    background: #f9f9f9;    
+    padding: 8px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    margin-right: 12px;
+    
+    box-shadow: inset 0 4px 8px #eee;
+    -moz-box-shadow: inset 0 4px 8px #eee;
+    
+    width: 640px;
+    display: inline-block;
+    *zoom: 1;
+    vertical-align: top; 
 }
-
-
-#stats td
-{
-    padding: 3px;
-}
-
-.words
-{
-    font-size: 15px;
-    vertical-align: bottom;
-}
-
-
-#loading
-{
-    margin: 30px auto auto;
-    font-size: 15px;
-    font-weight: bold;
-    width: 600px;
-    text-align: center;
-}
-
-#logo
-{
-    float: left;
-}
-
-.left
-{
-    float: left;
-    width: 60%;
-    margin-left: 10px;
-}
-
-.right
-{
-    float: right;
-    margin-right: 10px;
-}
-
-.clear
-{
-    clear: both;
-}
-
-a img
-{
-    border: 0;
-}
-
-#recent ul
-{
-    list-style-type: none;
-    padding-left: 0px;
-    text-align: left;
-}
-
-#recent li
-{
-    margin: auto auto 20px 0;
-    pading-left: 0px;
-}
-
-#recent a, #recent a:visited, #recent a:active
-{
-    color: Blue;
-    text-decoration: none;
-}
-
+    
+    #recent h2 {
+        margin: 0 0 0.3em 0;    
+        color: #555;
+    }
+    
+    #recent a {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    
+    #recent p {
+        margin-left: 0.5em;    
+    }

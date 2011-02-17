@@ -2,7 +2,7 @@
     NuGetStatistics.Update(Cache);
     
     var stats = PackageRepository.GetCurrentStatistics(Cache);
-
+    Response.ContentType = "application/json";
     Response.Write(Json.Encode(new {
         TotalCount = String.Format("{0:0,0}", stats.TotalCount),
         UniqueCount = String.Format("{0:0,0}", stats.UniqueCount),

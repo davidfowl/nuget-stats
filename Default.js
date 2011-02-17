@@ -1,21 +1,22 @@
 ﻿$(function () {
     function getStats() {
-        $.get('stats', function (stats) {
+        $.get('stats.cshtml').success(function (stats) {
             update('downloads', stats.TotalDownloads);
             update('unique', stats.UniqueCount);
             update('total', stats.TotalCount);
 
-            var recent = $('#recent ul').html('');
+            var recent = $('#recent'), ul = recent.children('ul').html('');
             $.each(stats.LatestPackages, function (i) {
                 var value = this.Id + " (" + this.Version + ")";
-                recent.append('<li><a href="' + this.Url + '"><strong>' + this.Id + ' (' + this.Version + ')</strong></a></li>');
-            });
+                ul.append('<li><a href="' + this.Url + '">' + this.Id + ' (' + this.Version + ')</a><p>' + this.Desc + '</p></li>');
+            }); 
 
             $('#loading').hide();
-            $('#main').fadeIn('slow');
+            $('#main').show();
+            $('#tweets .twtr-timeline').height(recent.outerHeight()-92);
 
             setTimeout(getStats, 5000);
-        }, 'json');
+        });
     }
 
     function update(element, value) {
@@ -33,7 +34,9 @@
                 }
             });
             for (var i = diff - 1; i >= 0; i--) {
-                $('#' + element).prepend('<span>' + value.charAt(i) + '</span>');
+                var el = $('<span/>');
+                $('#' + element).prepend(el);
+                animateEl(el, value.charAt(i));
             }
         }
 
@@ -44,5 +47,6 @@
             });
         }
     }
+    
     getStats();
 });

@@ -4,12 +4,13 @@
         <title>@Page.Title</title>
         <link href="@Href("Site.css")" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="@Href("favicon.ico")" />
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.4.4.min.js" type="text/javascript"></script>
         <meta name="description" content="@Page.Description" />
         @RenderSection("head", required: false)
     </head>
 
     <body>
         @RenderBody()
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.5.min.js"></script>
+        @RenderSection("foot", required: false)
     </body>    
 </html>
