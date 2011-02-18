@@ -42,18 +42,23 @@ public class PackageRepository {
             TotalDownloads = packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum(),
             LatestPackages = (from p in packages
                               orderby p.LastUpdated descending
-                              select new {
-                                  Id = p.Id,
-                                  Version = p.Version.ToString(),
-                                  Url = FixDetailsUrl(p.GalleryDetailsUrl),
-                                  Desc = p.Description
-                              }).Take(5)
+                              select GetPackage(p)).Take(5),
+            TopPackages = (from p in packages
+                           orderby p.DownloadCount descending
+                           select GetPackage(p)).Take(5)
         };
     }
 
-    private static string FixDetailsUrl(Uri uri) {
+    private static dynamic GetPackage(DataServicePackage package) {
         // The official feed has a bug where the url contains a reference to localhost.
         // This is a temporary workaround.
-        return uri.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
+        var uri = package.GalleryDetailsUrl.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
+
+        return new {
+            Id = package.Id,
+            Version = package.Version.ToString(),
+            Url = uri,
+            Desc = package.Description
+        };
     }
 }

@@ -17,18 +17,28 @@
         <div id="loading">
         </div>
         <div id="main">            
-            <div id="stats">
-                <span class="stat" id="stat-1"><span class="num" id="unique">&nbsp;</span>unique packages</span>
-                <span class="stat" id="stat-2"><span class="num" id="downloads">&nbsp;</span>package downloads</span>
-                <span class="stat" id="stat-3"><span class="num" id="total">&nbsp;</span>total packages</span>
+            <div class="stats">
+                <span class="stat stat-1"><span class="num" id="unique">&nbsp;</span>unique packages</span>
+                <span class="stat stat-2"><span class="num" id="downloads">&nbsp;</span>package downloads</span>
+                <span class="stat stat-3"><span class="num" id="total">&nbsp;</span>total packages</span>
+                <br />
+                <br />
+                <span class="stat stat-1"><span class="num" id="packagesDay">&nbsp;</span>packages added in the last day</span>
+                <span class="stat stat-2"></span>
+                <span class="stat stat-3"><span class="num" id="downloadsHour">&nbsp;</span>downloads in the last hour</span>
             </div>
-            <div id="recent">
+            <div id="recent" class="package-list">
                 <h2>Just Updated</h2>
                 <ul>
                 </ul>
             </div>
             <div id="tweets">
                 @Twitter.Search("#nuget", 287, 200)
+            </div>
+            <div id="topPackages" class="package-list">
+                <h2>Top Packages</h2>
+                <ul>
+                </ul>
             </div>
             <div id="charts">
                 <h2>Charts</h2>

@@ -1,14 +1,16 @@
 ﻿@{
     NuGetStatistics.Update(Cache);
-    
     var stats = PackageRepository.GetCurrentStatistics(Cache);
-    
+    var metaStats = NuGetStatistics.GetMetaStatistics(Cache);
+
     Response.ContentType = "application/json";
-    
     Response.Write(Json.Encode(new {
         TotalCount = String.Format("{0:0,0}", stats.TotalCount),
         UniqueCount = String.Format("{0:0,0}", stats.UniqueCount),
         TotalDownloads = String.Format("{0:0,0}", stats.TotalDownloads),
-        LatestPackages = stats.LatestPackages
+        LatestPackages = stats.LatestPackages,
+        TopPackages = stats.TopPackages,
+        HourDownloads = metaStats.HourDownloads,
+        DayPackages = metaStats.DayPackages
     }));
 }

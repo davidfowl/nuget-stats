@@ -1,22 +1,29 @@
 ﻿$(function () {
+    var currentLatest = {};
     function getStats() {
-        var x = 0;
         $.get('stats', function (stats) {
             update('downloads', stats.TotalDownloads);
             update('unique', stats.UniqueCount);
             update('total', stats.TotalCount);
+            update('packagesDay', stats.DayPackages);
+            update('downloadsHour', stats.HourDownloads);
 
-            var recent = $('#recent'), ul = recent.children('ul').html('');
-            $.each(stats.LatestPackages, function () {
-                var value = this.Id + " (" + this.Version + ")";
-                ul.append('<li><a href="' + this.Url + '">' + this.Id + ' (' + this.Version + ')</a><p>' + this.Desc + '</p></li>');
-            });
+            updateList($('#recent ul'), stats.LatestPackages);
+            updateList($('#topPackages ul'), stats.TopPackages);
 
             $('#loading').hide();
             $('#main').show();
 
-            setTimeout(getStats, 5000);
+            setTimeout(getStats, 8000);
         }, 'json');
+    }
+
+    function updateList(list, values) {
+        var content = [];
+        $.each(values, function (i) {
+            content.push('<li><a href="' + this.Url + '">' + this.Id + ' (' + this.Version + ')</a><p>' + this.Desc + '</p></li>');
+        });
+        list.html(content.join(''));
     }
 
     function update(element, value) {

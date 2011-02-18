@@ -1,5 +1,5 @@
 ﻿@{       
-    var stats = NuGetStatistics.GetStatistics(1000);
+    var stats = NuGetStatistics.GetStatsHistory(1000);
     var chart = new Chart(600, 300, themePath: "ChartTemplate.xml")
         .AddSeries(chartType: "Line", xValue: stats, xField: "LogTime", yValues: stats, yFields: "Downloads")
         .AddTitle("Downloads")

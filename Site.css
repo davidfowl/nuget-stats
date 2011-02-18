@@ -61,7 +61,7 @@ a { color: #00A0E7; }
         color: #888;
     } 
 
-#stats {
+.stats {
     box-shadow: inset 0 4px 8px #000;
     -moz-box-shadow: inset 0 4px 8px #000;
     background: #555;    
@@ -72,7 +72,7 @@ a { color: #00A0E7; }
     min-height: 80px;
 }
     
-#stats .stat {
+.stats .stat {
     display: inline-block;
     *zoom: 1;
     color: #bbb;
@@ -82,7 +82,7 @@ a { color: #00A0E7; }
     width: 33%;
 } 
 
-#stats .num {
+.stats .num {
     font-size: 4em;
     color: #f9f9f9;
     font-family: monospace;
@@ -91,7 +91,7 @@ a { color: #00A0E7; }
     text-shadow: 0 2px 1px black;
 }
 
-#stats .num > span
+.stats .num > span
 {
     position: relative;
 }
@@ -104,7 +104,7 @@ a { color: #00A0E7; }
     overflow: hidden;
 }
 
-#recent {
+.package-list {
     background: #f9f9f9;    
     padding: 8px;
     border-radius: 8px;
@@ -120,17 +120,22 @@ a { color: #00A0E7; }
     vertical-align: top; 
 }
     
-    #recent h2 {
+    .package-list h2 {
         margin: 0 0 0.3em 0;    
         color: #555;
     }
     
-    #recent a {
+    .package-list a {
         font-size: 1.1em;
         font-weight: bold;
         text-decoration:none;
     }
     
-    #recent p {
+    .package-list p {
         margin-top: 0.5em;    
     }
+ 
+ #topPackages 
+ {
+     margin-top: 10px;
+ }
