@@ -15,12 +15,14 @@ body {
     padding: 8px;
     box-shadow: 0 4px 10px 2px #05005F;
     -moz-box-shadow: 0 4px 10px 2px #05005F;
+    min-height:500px;
 }
 
-#main { display: none; }
 #loading {
-    background: url(/loading.gif) no-repeat center center;
-    height: 300px;
+    background: url(loading.gif) no-repeat center center;
+    height:32px;
+    margin-left:10%;
+    margin-top:15%;
 }
 
 a { color: #00A0E7; }
@@ -49,6 +51,7 @@ a { color: #00A0E7; }
     -moz-border-radius: 8px;
     margin: 0 0 1em 0;
     padding: 8px;
+    min-height: 80px;
 }
     
 #stats .stat {
@@ -102,6 +105,7 @@ a { color: #00A0E7; }
     #recent a {
         font-size: 1.1em;
         font-weight: bold;
+        text-decoration:none;
     }
     
     #recent p {

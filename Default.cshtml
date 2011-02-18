@@ -9,29 +9,28 @@
 <div id="page">
     <div id="title">
         <a href="http://nuget.org">
-            <img src="@Href("nuget-logo.png")" class="logo" alt="NuGet" /></a>
-        <h1>
-            Statistics</h1>
+            <img src="@Href("nuget-logo.png")" class="logo" alt="NuGet" />
+        </a>
+        <h1>Statistics</h1>
     </div>
     <div id="body">
-        <div id="main">
+        <div id="main">            
             <div id="stats">
-                <span class="stat" id="stat-1"><span class="num" id="unique"></span>unique packages</span>
-                <span class="stat" id="stat-2"><span class="num" id="downloads"></span>downloads</span>
-                <span class="stat" id="stat-3"><span class="num" id="total"></span>total packages</span>
+                <span class="stat" id="stat-1"><span class="num" id="unique">&nbsp;</span>unique packages</span>
+                <span class="stat" id="stat-2"><span class="num" id="downloads">&nbsp;</span>downloads</span>
+                <span class="stat" id="stat-3"><span class="num" id="total">&nbsp;</span>total packages</span>
             </div>
             <div id="recent">
-                <h2>
-                    Just Updated</h2>
+                <h2>Just Updated</h2>
+                <div id="loading">
+                </div>
                 <ul>
                 </ul>
             </div>
             <div id="tweets">
                 @Twitter.Search("#nuget", 287, 200)
             </div>
-        </div>
-        <div id="loading">
-        </div>
+        </div>        
     </div>
 </div>
 

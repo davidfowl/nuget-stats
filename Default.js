@@ -12,9 +12,7 @@
             }); 
 
             $('#loading').hide();
-            $('#main').show();
-            $('#tweets .twtr-timeline').height(recent.outerHeight()-92);
-
+            
             setTimeout(getStats, 5000);
         });
     }
