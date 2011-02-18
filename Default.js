@@ -1,18 +1,20 @@
 ﻿$(function () {
     function getStats() {
+        var x = 0;
         $.get('stats', function (stats) {
             update('downloads', stats.TotalDownloads);
             update('unique', stats.UniqueCount);
             update('total', stats.TotalCount);
 
             var recent = $('#recent'), ul = recent.children('ul').html('');
-            $.each(stats.LatestPackages, function (i) {
+            $.each(stats.LatestPackages, function () {
                 var value = this.Id + " (" + this.Version + ")";
                 ul.append('<li><a href="' + this.Url + '">' + this.Id + ' (' + this.Version + ')</a><p>' + this.Desc + '</p></li>');
-            }); 
+            });
 
             $('#loading').hide();
-            
+            $('#main').show();
+
             setTimeout(getStats, 5000);
         }, 'json');
     }
@@ -32,19 +34,17 @@
                 }
             });
             for (var i = diff - 1; i >= 0; i--) {
-                var el = $('<span/>');
-                $('#' + element).prepend(el);
-                animateEl(el, value.charAt(i));
+                $('#' + element).prepend('<span>' + value.charAt(i) + '</span>');
             }
         }
 
         function animateEl(el, v) {
             v = v || '';
-            el.animate({ top: parseInt(0.5 * el.parent().height()) }, 350, 'linear', function () {
-                $(this).html(v).css({ top: -parseInt(0.5 * el.parent().height()) }).animate({ top: 0 }, 350, 'linear')
+            el.animate({ top: 0.3 * parseInt(el.parent().height()) }, 350, 'linear', function () {
+                $(this).html(v).css({ top: -0.8 * parseInt(el.parent().height()) }).animate({ top: 0 }, 350, 'linear')
             });
         }
     }
-    
+
     getStats();
 });

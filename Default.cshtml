@@ -14,6 +14,8 @@
         <h1>statistics</h1>
     </div>
     <div id="body">
+        <div id="loading">
+        </div>
         <div id="main">            
             <div id="stats">
                 <span class="stat" id="stat-1"><span class="num" id="unique">&nbsp;</span>unique packages</span>
@@ -22,20 +24,19 @@
             </div>
             <div id="recent">
                 <h2>Just Updated</h2>
-                <div id="loading">
-                </div>
                 <ul>
                 </ul>
             </div>
             <div id="tweets">
                 @Twitter.Search("#nuget", 287, 200)
             </div>
+            <div id="charts">
+                <h2>Charts</h2>
+                <img src="viewstats.cshtml" alt="downloads" />
+                <div id="copyright">&#169; 2010 Outercurve Foundation.</div>
+            </div>
         </div>
-        <div id="charts">
-            <h2>Charts</h2>
-            <img src="viewstats.cshtml" alt="downloads" />
-            <div id="copyright">&#169; 2010 Outercurve Foundation.</div>
-        </div>
+        
     </div>
 </div>
 
