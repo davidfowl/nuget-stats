@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Caching;
 using NuGet;
 
@@ -59,11 +60,16 @@ public class PackageRepository {
         };
     }
 
-    private static string FixGalleryUrl(Uri url) {
+    private static string FixGalleryUrl(Uri galleryUrl) {
         // The official feed has a bug where the url contains a reference to localhost.
         // This is a temporary workaround.
-        return url.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
+        var fixedUrl = galleryUrl.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
 
-        
+        // The urls for some packages do not have the correct path to the details page. 
+        // We append an additional 'Packages' to the path if we don't see it repeating twice.
+        if (fixedUrl.IndexOf("Packages/Packages", StringComparison.OrdinalIgnoreCase) == -1) {
+            fixedUrl = fixedUrl.Replace("http://nuget.org/Packages", "http://nuget.org/Packages/Packages");
+        }
+        return fixedUrl;
     }
 }
