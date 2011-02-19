@@ -20,7 +20,7 @@ body {
 #loading {
     background: url(loading.gif) no-repeat center center;
     height:32px;
-    margin-left:10%;
+    margin-left:0%;
     margin-top:15%;
 }
 
@@ -131,7 +131,11 @@ a { color: #00A0E7; }
     .package-list p {
         margin-top: 0.5em;    
     }
- 
+    
+    .package-list li {
+        top:1%;
+        margin-bottom:2%;
+    }
  #recent 
  {
     float: left;

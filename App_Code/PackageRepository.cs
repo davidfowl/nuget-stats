@@ -44,19 +44,22 @@ public class PackageRepository {
             LatestPackages = (from p in packages
                               orderby p.LastUpdated descending
                               select new {
-                                Id = p.Id,
-                                Version = p.Version,
-                                Url = FixGalleryUrl(p.GalleryDetailsUrl)
-                            }).Take(5),
+                                  Id = p.Id,
+                                  Version = p.Version,
+                                  Url = FixGalleryUrl(p.GalleryDetailsUrl)
+                              }).Take(5),
             TopPackages = (from g in packages.GroupBy(p => p.Id)
-                          let downloadCount = g.Sum(c => c.DownloadCount)
-                          let latest = (from p in g orderby Version.Parse(p.Version) descending select p).First()
-                          orderby downloadCount descending
-                          select new {
-                              Id = latest.Id,
-                              DownloadCount = downloadCount,
-                              Url = FixGalleryUrl(latest.GalleryDetailsUrl)
-                          }).Take(5)
+                           let downloadCount = g.First().DownloadCount
+                           let latest = (from p in g 
+                                         let version = Version.Parse(p.Version)
+                                         orderby version descending 
+                                         select p).First()
+                           orderby downloadCount descending
+                           select new {
+                               Id = latest.Id,
+                               DownloadCount = downloadCount,
+                               Url = FixGalleryUrl(latest.GalleryDetailsUrl)
+                           }).Take(5)
         };
     }
 
