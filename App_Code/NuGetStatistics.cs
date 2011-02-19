@@ -23,7 +23,7 @@ public static class NuGetStatistics {
     public static IEnumerable<dynamic> GetStatsHistory(int total = 10) {
         total = Math.Min(total, 10000);
         using (var db = Database.Open("Stats")) {
-            return db.Query("Select top "+ total + " * from Stats order by LogTime desc");
+            return db.Query("Select top " + total + " * from Stats order by LogTime desc");
         }
     }
 
@@ -43,10 +43,8 @@ public static class NuGetStatistics {
     }
 
     public static MetaStatistics GetMetaStatistics(Statistics stats) {
-        MetaStatistics metaStats = new MetaStatistics();
+        var metaStats = new MetaStatistics();
         using (var db = Database.Open("Stats")) {
-            
-
             metaStats.HourDownloads = stats.TotalDownloads - (int)db.QueryValue("Select top 1 Downloads from Stats where LogTime < DateAdd(hh, -1, GetDate()) order by LogTime desc");
             metaStats.DayPackages = stats.TotalCount - (int)db.QueryValue("Select top 1 TotalPackages from Stats where LogTime < DateAdd(day, -1, GetDate()) order by LogTime desc");
         }
