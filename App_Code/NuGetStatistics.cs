@@ -45,8 +45,16 @@ public static class NuGetStatistics {
     public static MetaStatistics GetMetaStatistics(Statistics stats) {
         var metaStats = new MetaStatistics();
         using (var db = Database.Open("Stats")) {
-            metaStats.HourDownloads = stats.TotalDownloads - (int)db.QueryValue("Select top 1 Downloads from Stats where LogTime < DateAdd(hh, -1, GetDate()) order by LogTime desc");
-            metaStats.DayPackages = stats.TotalCount - (int)db.QueryValue("Select top 1 TotalPackages from Stats where LogTime < DateAdd(day, -1, GetDate()) order by LogTime desc");
+            int? hourDownloads = stats.TotalDownloads - (int?)db.QueryValue("Select top 1 Downloads from Stats where LogTime < DateAdd(hh, -1, GetDate()) order by LogTime desc");
+            int? dayPackages = stats.TotalCount - (int?)db.QueryValue("Select top 1 TotalPackages from Stats where LogTime < DateAdd(day, -1, GetDate()) order by LogTime desc");
+
+            if (dayPackages.HasValue) {
+                metaStats.DayPackages = dayPackages.Value;
+            }
+
+            if (hourDownloads.HasValue) {
+                metaStats.HourDownloads = hourDownloads.Value;
+            }
         }
         return metaStats;
     }
