@@ -32,23 +32,28 @@
                 <ul>
                 </ul>
             </div>
-            <div id="tweets">
-                @Twitter.Search("#nuget", 287, 200)
-            </div>
+            
             <div id="topPackages" class="package-list">
                 <h2>Top Packages</h2>
                 <ul>
                 </ul>
             </div>
+            <div class="clear"></div>
+            <br />
             <div id="charts">
                 <h2>Charts</h2>
                 <img src="viewstats.cshtml" alt="downloads" />
-                <div id="copyright">&#169; 2010 Outercurve Foundation.</div>
             </div>
+            <div id="tweets">
+                @Twitter.Search("#nuget", 287, 200)
+            </div>
+            <div class="clear"></div>
         </div>
-        
     </div>
 </div>
+<footer>
+    &#169; 2010 Outercurve Foundation.
+</footer>   
 
 @section foot {
     <script type="text/javascript" src="@Href("Default.js")"></script>

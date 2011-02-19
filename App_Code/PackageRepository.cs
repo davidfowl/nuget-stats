@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Caching;
 using NuGet;
 
@@ -42,23 +43,33 @@ public class PackageRepository {
             TotalDownloads = packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum(),
             LatestPackages = (from p in packages
                               orderby p.LastUpdated descending
-                              select GetPackage(p)).Take(5),
-            TopPackages = (from p in packages
-                           orderby p.DownloadCount descending
-                           select GetPackage(p)).Take(5)
+                              select new {
+                                Id = p.Id,
+                                Version = p.Version,
+                                Url = FixGalleryUrl(p.GalleryDetailsUrl)
+                            }).Take(5),
+            TopPackages = (from g in packages.GroupBy(p => p.Id)
+                          let downloadCount = g.Sum(c => c.DownloadCount)
+                          let latest = (from p in g orderby Version.Parse(p.Version) descending select p).First()
+                          orderby downloadCount descending
+                          select new {
+                              Id = latest.Id,
+                              DownloadCount = downloadCount,
+                              Url = FixGalleryUrl(latest.GalleryDetailsUrl)
+                          }).Take(5)
         };
     }
 
-    private static dynamic GetPackage(DataServicePackage package) {
+    private static string FixGalleryUrl(Uri galleryUrl) {
         // The official feed has a bug where the url contains a reference to localhost.
         // This is a temporary workaround.
-        var uri = package.GalleryDetailsUrl.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
+        var fixedUrl = galleryUrl.OriginalString.Replace("http://localhost:777/", "http://nuget.org/");
 
-        return new {
-            Id = package.Id,
-            Version = package.Version.ToString(),
-            Url = uri,
-            Desc = package.Description
-        };
+        // The urls for some packages do not have the correct path to the details page. 
+        // We append an additional 'Packages' to the path if we don't see it repeating twice.
+        if (fixedUrl.IndexOf("Packages/Packages", StringComparison.OrdinalIgnoreCase) == -1) {
+            fixedUrl = fixedUrl.Replace("http://nuget.org/Packages", "http://nuget.org/Packages/Packages");
+        }
+        return fixedUrl;
     }
 }
