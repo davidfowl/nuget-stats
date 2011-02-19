@@ -1,7 +1,7 @@
 ﻿$(function () {
     var currentLatest = {};
     function getStats() {
-        $.get('stats', function (stats) {
+        $.post('stats', function (stats) {
             update('downloads', stats.TotalDownloads);
             update('unique', stats.UniqueCount);
             update('total', stats.TotalCount);

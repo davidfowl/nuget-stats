@@ -14,7 +14,7 @@ body {
     padding: 8px;
     box-shadow: 0 4px 10px 2px #ccc;
     -moz-box-shadow: 0 4px 10px 2px #ccc;
-    min-height:500px;
+    min-height:550px;
 }
 
 #loading {

@@ -68,8 +68,8 @@ public class PackageRepository {
 
         // The urls for some packages do not have the correct path to the details page. 
         // We append an additional 'Packages' to the path if we don't see it repeating twice.
-        if (fixedUrl.IndexOf("Packages/Packages/", StringComparison.OrdinalIgnoreCase) == -1) {
-            fixedUrl = fixedUrl.Replace("http://nuget.org/Packages/", "http://nuget.org/Packages/Packages/");
+        if (fixedUrl.IndexOf("Packages//", StringComparison.OrdinalIgnoreCase) >= 0) {
+            fixedUrl = fixedUrl.Replace("Packages//", "Packages/Packages/");
         }
         return fixedUrl;
     }
