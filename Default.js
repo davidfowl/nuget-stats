@@ -8,22 +8,17 @@
             update('packagesDay', stats.DayPackages);
             update('downloadsHour', stats.HourDownloads);
 
-            updateList($('#recent ul'), stats.LatestPackages);
-            updateList($('#topPackages ul'), stats.TopPackages);
+            $('#recent ul').html($.map(stats.LatestPackages, function(e) { 
+                return '<li><a href="' + e.Url + '">' + e.Id + ' (' + e.Version + ')</a></li>'}).join(''));
+            
+            $('#topPackages ul').html($.map(stats.TopPackages, function(e) { 
+                return '<li><a href="' + e.Url + '">' + e.Id + '</a> (' + e.DownloadCount + ' downloads)</li>'}).join(''));
 
             $('#loading').hide();
             $('#main').show();
 
             setTimeout(getStats, 8000);
         }, 'json');
-    }
-
-    function updateList(list, values) {
-        var content = [];
-        $.each(values, function (i) {
-            content.push('<li><a href="' + this.Url + '">' + this.Id + ' (' + this.Version + ')</a><p>' + this.Desc + '</p></li>');
-        });
-        list.html(content.join(''));
     }
 
     function update(element, value) {
