@@ -43,7 +43,7 @@ public class PackageRepository {
             TotalDownloads = packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum(),
             LatestPackages = (from p in packages
                               orderby p.LastUpdated descending
-                              select new {
+                              select new StatsPackage {
                                   Id = p.Id,
                                   Version = p.Version,
                                   Url = FixGalleryUrl(p.GalleryDetailsUrl)
@@ -55,7 +55,7 @@ public class PackageRepository {
                                          orderby version descending 
                                          select p).First()
                            orderby downloadCount descending
-                           select new {
+                           select new StatsPackage {
                                Id = latest.Id,
                                DownloadCount = downloadCount,
                                Url = FixGalleryUrl(latest.GalleryDetailsUrl)

@@ -2,11 +2,11 @@
   <ChartAreas>
     <ChartArea Name="Default" _Template_="All" BackColor="64, 165, 191, 228" BackGradientStyle="TopBottom" BackSecondaryColor="White" BorderColor="64, 64, 64, 64" BorderDashStyle="Solid" ShadowColor="Transparent">
       <AxisY>
-        <MajorGrid Enabled="False" />
+          <LabelStyle Format="{0:0,0}" />
+        <MajorGrid Enabled="True" LineDashStyle="Dash" />
         <MinorGrid Enabled="False" />
       </AxisY>
       <AxisX LineColor="64, 64, 64, 64">
-        <LabelStyle Interval="1" />
         <MajorGrid Enabled="False" />
         <MinorGrid Enabled="False" />
       </AxisX>
