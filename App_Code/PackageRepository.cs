@@ -50,9 +50,9 @@ public class PackageRepository {
                               }).Take(5),
             TopPackages = (from g in packages.GroupBy(p => p.Id)
                            let downloadCount = g.First().DownloadCount
-                           let latest = (from p in g 
+                           let latest = (from p in g
                                          let version = Version.Parse(p.Version)
-                                         orderby version descending 
+                                         orderby version descending
                                          select p).First()
                            orderby downloadCount descending
                            select new StatsPackage {
