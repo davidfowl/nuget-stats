@@ -46,7 +46,7 @@ public class PackageRepository {
                               select new StatsPackage {
                                   Id = p.Id,
                                   Version = p.Version,
-                                  Url = FixGalleryUrl(p.GalleryDetailsUrl)
+                                  Url = FixGalleryUrl(p)
                               }).Take(5),
             TopPackages = (from g in packages.GroupBy(p => p.Id)
                            let downloadCount = g.First().DownloadCount
@@ -58,19 +58,13 @@ public class PackageRepository {
                            select new StatsPackage {
                                Id = latest.Id,
                                DownloadCount = downloadCount,
-                               Url = FixGalleryUrl(latest.GalleryDetailsUrl)
+                               Url = FixGalleryUrl(latest)
                            }).Take(5)
         };
     }
 
-    private static string FixGalleryUrl(Uri galleryUrl) {
-        var fixedUrl = galleryUrl.OriginalString;
-
-        // The urls for some packages do not have the correct path to the details page. 
-        // We append an additional 'Packages' to the path if we don't see it repeating twice.
-        if (fixedUrl.IndexOf("Packages//", StringComparison.OrdinalIgnoreCase) >= 0) {
-            fixedUrl = fixedUrl.Replace("Packages//", "Packages/Packages/");
-        }
-        return fixedUrl;
+    private static string FixGalleryUrl(DataServicePackage package) {
+        // Workaround for the gallery url until it is fixed.
+        return "http://nuget.org/List/Packages/" + package.Id + "/" + package.Version.ToString();
     }
 }
