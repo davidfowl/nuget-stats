@@ -7,7 +7,7 @@
                 <MinorGrid Enabled="False" />
             </AxisY>
             <AxisX LineColor="64, 64, 64, 64">
-                <LabelStyle Format="{0:ddd d, HH:mm}" />
+                <LabelStyle Format="{0:ddd d}" />
                 <MajorGrid Enabled="False" />
                 <MinorGrid Enabled="False" />
             </AxisX>
@@ -16,5 +16,4 @@
     <Legends>
         <Legend _Template_="All" BackColor="Transparent" Font="Trebuchet MS, 8.25pt, style=Bold" IsTextAutoFit="False" />
     </Legends>
-
 </Chart>
