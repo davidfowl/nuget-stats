@@ -5,6 +5,10 @@ using WebMatrix.Data;
 
 public static class NuGetStatistics {
     public static void Update(Cache cache) {
+        Lazy.Run(() => UpdateCore(cache));
+    }
+
+    private static void UpdateCore(Cache cache) {
         using (var db = Database.Open("Stats")) {
             DateTime? lastLog = db.QueryValue("Select top 1 LogTime from Stats order by LogTime desc");
 

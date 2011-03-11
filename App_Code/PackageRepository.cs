@@ -1,34 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Caching;
 using NuGet;
 
 public class PackageRepository {
-    private static readonly object _lockObject = new object();
     private static readonly DataServicePackageRepository _repository = new DataServicePackageRepository(new Uri("http://packages.nuget.org/v1/FeedService.svc"));
 
     private static IList<DataServicePackage> GetPackages(Cache cache) {
-        // Try to load if from the cache
+        return Lazy.Run(() => GetPackagesCore(cache));
+    }
+
+    private static IList<DataServicePackage> GetPackagesCore(Cache cache) {
         var packages = (IList<DataServicePackage>)cache.Get("packages");
 
-        // Double check lock
         if (packages == null) {
-            lock (_lockObject) {
-                packages = (IList<DataServicePackage>)cache.Get("packages");
+            packages = _repository.GetPackages().AsEnumerable().Cast<DataServicePackage>().ToList();
 
-                if (packages == null) {
-                    // If we still don't have anything cached then get the package list and store it.
-                    packages = _repository.GetPackages().AsEnumerable().Cast<DataServicePackage>().ToList();
-
-                    cache.Insert("packages",
-                                  packages,
-                                  null,
-                                  DateTime.Now + TimeSpan.FromSeconds(20),
-                                  Cache.NoSlidingExpiration);
-                }
-            }
+            cache.Insert("packages",
+                          packages,
+                          null,
+                          DateTime.Now + TimeSpan.FromSeconds(20),
+                          Cache.NoSlidingExpiration);
         }
 
         return packages;
