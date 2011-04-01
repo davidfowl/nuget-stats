@@ -11,7 +11,7 @@
         TotalDownloads = String.Format("{0:0,0}", stats.TotalDownloads),
         LatestPackages = stats.LatestPackages,
         TopPackages = new[] {
-                            new { Id = "FourOne.Memes", DownloadCount = "> 9,000",  Url = "http://nuget.org/List/Packages/FourOne.Memes/1.0" },
+                            new { Id = "FourOne.Memes", DownloadCount = "Over 9,000!!!",  Url = "http://nuget.org/List/Packages/FourOne.Memes/1.0" },
                       }.Concat(
                         from package in stats.TopPackages
                         select new { Id = package.Id, DownloadCount = String.Format("{0:0,0}", package.DownloadCount), Url = package.Url }
