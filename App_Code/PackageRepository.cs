@@ -6,25 +6,14 @@ using NuGet;
 
 public class PackageRepository {
     private static readonly DataServicePackageRepository _repository = new DataServicePackageRepository(new Uri("http://packages.nuget.org/v1/FeedService.svc"));
+    internal static readonly TimeSpan CacheTime = TimeSpan.FromMinutes(5);
 
     private static IList<DataServicePackage> GetPackages(Cache cache) {
-        return Lazy.Run(() => GetPackagesCore(cache));
+        return cache.GetOrCreate<IList<DataServicePackage>>("packages", GetPackages, CacheTime);
     }
 
-    private static IList<DataServicePackage> GetPackagesCore(Cache cache) {
-        var packages = (IList<DataServicePackage>)cache.Get("packages");
-
-        if (packages == null) {
-            packages = _repository.GetPackages().AsEnumerable().Cast<DataServicePackage>().ToList();
-
-            cache.Insert("packages",
-                          packages,
-                          null,
-                          DateTime.Now + TimeSpan.FromSeconds(20),
-                          Cache.NoSlidingExpiration);
-        }
-
-        return packages;
+    private static IList<DataServicePackage> GetPackages() {
+        return _repository.GetPackages().AsEnumerable().Cast<DataServicePackage>().ToList();
     }
 
     public static Statistics GetCurrentStatistics(Cache cache) {

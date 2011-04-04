@@ -4,23 +4,28 @@ using System.Web.Caching;
 using WebMatrix.Data;
 
 public static class NuGetStatistics {
+    private const string UpdatedStatsCacheKey = "updated_stats";
     public static void Update(Cache cache) {
-        Lazy.Run(() => UpdateCore(cache));
+        UpdateCore(cache);
     }
 
     private static void UpdateCore(Cache cache) {
-        using (var db = Database.Open("Stats")) {
-            DateTime? lastLog = db.QueryValue("Select top 1 LogTime from Stats order by LogTime desc");
+        cache.GetOrCreate<object>(UpdatedStatsCacheKey, () => {
+            using (var db = Database.Open("Stats")) {
+                DateTime? lastLog = db.QueryValue("Select top 1 LogTime from Stats order by LogTime desc");
+                if (!lastLog.HasValue || DateTime.UtcNow.Subtract(lastLog.Value).TotalMinutes > 30) {
+                    Statistics stats = PackageRepository.GetCurrentStatistics(cache);
 
-            if (!lastLog.HasValue || DateTime.UtcNow.Subtract(lastLog.Value).TotalMinutes > 30) {
-                var stats = PackageRepository.GetCurrentStatistics(cache);
-
-                db.Execute("Insert into Stats (LogTime, Downloads, UniquePackages, TotalPackages) values (GETUTCDATE(), @0, @1, @2)",
-                    stats.TotalDownloads,
-                    stats.UniqueCount,
-                    stats.TotalCount);
+                    db.Execute("Insert into Stats (LogTime, Downloads, UniquePackages, TotalPackages) values (GETUTCDATE(), @0, @1, @2)",
+                        stats.TotalDownloads,
+                        stats.UniqueCount,
+                        stats.TotalCount);
+                }
             }
-        }
+
+            return new object();
+
+        }, TimeSpan.FromMinutes(5));
     }
 
     public static IEnumerable<dynamic> GetStatsHistory(int total = 10) {
@@ -31,18 +36,12 @@ public static class NuGetStatistics {
     }
 
     public static MetaStatistics GetMetaStatistics(Cache cache) {
-        MetaStatistics metaStats = (MetaStatistics)cache.Get("metastats");
-        if (metaStats == null) {
-            metaStats = GetMetaStatistics(PackageRepository.GetCurrentStatistics(cache));
+        return cache.GetOrCreate<MetaStatistics>("metastats", () => GetMetaStatisticsCore(cache), PackageRepository.CacheTime);
+    }
 
-            cache.Insert("metastats",
-                        metaStats,
-                        null,
-                        DateTime.Now + TimeSpan.FromSeconds(60),
-                        Cache.NoSlidingExpiration);
-        }
-
-        return metaStats;
+    private static MetaStatistics GetMetaStatisticsCore(Cache cache) {
+        Statistics stats = PackageRepository.GetCurrentStatistics(cache);
+        return GetMetaStatistics(stats);
     }
 
     public static MetaStatistics GetMetaStatistics(Statistics stats) {
@@ -52,11 +51,11 @@ public static class NuGetStatistics {
             int? dayPackages = stats.TotalCount - (int?)db.QueryValue("Select top 1 TotalPackages from Stats where LogTime < DateAdd(day, -1, GETUTCDATE()) order by LogTime desc");
 
             if (dayPackages.HasValue) {
-                metaStats.DayPackages = dayPackages.Value;
+                metaStats.DayPackages = Math.Max(0, dayPackages.Value);
             }
 
             if (hourDownloads.HasValue) {
-                metaStats.HourDownloads = hourDownloads.Value;
+                metaStats.HourDownloads = Math.Max(0, hourDownloads.Value);
             }
         }
         return metaStats;
