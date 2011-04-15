@@ -21,23 +21,37 @@
         }, 'json');
     }
 
+    getStats();
+
     function update(element, value) {
         value = value.toString();
         var currentValue = $.trim($('#' + element).text().replace(/\s/g, ''));
-
+        var self = $('#' + element);
         if (currentValue != value) {
-            var items = $('#' + element + ' span');
-            var diff = value.length - currentValue.length;
-            $.each(currentValue.split(''), function (i, e) {
-                var c = value.charAt(diff + i);
+            var length = value.length;
+            var currLength = currentValue.length;
+            var items = self.children('span');
+
+            if (currLength > length) {
+                while (items.length > length) {
+                    items.first().remove();
+                    items = self.children('span');
+                }
+            }
+            else if (currLength < length) {
+                for (var i = currLength; i < length; i++) {
+                    self.prepend('<span />');
+                }
+                items = self.children('span');
+            }
+
+            $.each(value.split('').reverse(), function (i, e) {
+                var c = (i < currLength) ? currentValue.charAt(currLength - i - 1) : '';
                 if (c != e) {
-                    var el = $(items[i]);
-                    animateEl(el, c);
+                    var el = $(items[length - i - 1]);
+                    animateEl(el, e);
                 }
             });
-            for (var i = diff - 1; i >= 0; i--) {
-                $('#' + element).prepend('<span>' + value.charAt(i) + '</span>');
-            }
         }
 
         function animateEl(el, v) {
@@ -47,6 +61,7 @@
             });
         }
     }
-
-    getStats();
 });
+
+
+
