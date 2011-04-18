@@ -28,10 +28,12 @@ public static class NuGetStatistics {
         }, TimeSpan.FromMinutes(5));
     }
 
-    public static IEnumerable<dynamic> GetStatsHistory(int total = 10) {
-        total = Math.Min(total, 10000);
+    public static IEnumerable<dynamic> GetStatsHistory(int? total = null) {
         using (var db = Database.Open("Stats")) {
-            return db.Query("Select top " + total + " * from Stats order by LogTime desc");
+            if (total.HasValue) {
+                return db.Query("Select top " + total + " * from Stats order by LogTime desc");
+            }
+            return db.Query("Select * from Stats order by LogTime desc");
         }
     }
 

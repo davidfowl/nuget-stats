@@ -14,11 +14,11 @@
             .Write(format: "png");
     }
     else {
-        var stats = NuGetStatistics.GetStatsHistory(1000);
+        var stats = NuGetStatistics.GetStatsHistory();
         new Chart(600, 300, themePath: "ChartTemplate.xml")
             .AddSeries(chartType: "Line", xValue: stats, xField: "LogTime", yValues: stats, yFields: "Downloads")
             .SetYAxis(min: 130000)
-            .AddTitle("Daily Downloads")
+            .AddTitle("Total Downloads")
             .Write(format: "png");
     }
     
