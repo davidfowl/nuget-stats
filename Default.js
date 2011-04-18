@@ -8,11 +8,13 @@
             update('packagesDay', stats.DayPackages);
             update('downloadsHour', stats.HourDownloads);
 
-            $('#recent ul').html($.map(stats.LatestPackages, function(e) { 
-                return '<li><a href="' + e.Url + '">' + e.Id + ' (' + e.Version + ')</a></li>'}).join(''));
-            
-            $('#topPackages ul').html($.map(stats.TopPackages, function(e) { 
-                return '<li><a href="' + e.Url + '">' + e.Id + '</a> (' + e.DownloadCount + ' downloads)</li>'}).join(''));
+            $('#recent ul').html($.map(stats.LatestPackages, function (e) {
+                return '<li><a href="' + e.Url + '">' + e.Id + ' (' + e.Version + ')</a></li>'
+            }).join(''));
+
+            $('#topPackages ul').html($.map(stats.TopPackages, function (e) {
+                return '<li><a href="' + e.Url + '">' + e.Id + '</a> (' + e.DownloadCount + ' downloads)</li>'
+            }).join(''));
 
             $('#loading').hide();
             $('#main').show();
@@ -25,8 +27,8 @@
 
     function update(element, value) {
         value = value.toString();
-        var currentValue = $.trim($('#' + element).text().replace(/\s/g, ''));
         var self = $('#' + element);
+        var currentValue = $.trim(self.text().replace(/\s/g, ''));
         if (currentValue != value) {
             var length = value.length;
             var currLength = currentValue.length;
@@ -40,9 +42,11 @@
             }
             else if (currLength < length) {
                 for (var i = currLength; i < length; i++) {
-                    self.prepend('<span />');
+                    self.prepend('<span>' + value.charAt(length - i - 1) + '</span>');
                 }
                 items = self.children('span');
+                currentValue = $.trim(self.text().replace(/\s/g, ''));
+                currLength = currentValue.length;
             }
 
             $.each(value.split('').reverse(), function (i, e) {
