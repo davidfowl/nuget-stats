@@ -7,7 +7,7 @@
                 <MinorGrid Enabled="False" />
             </AxisY>
             <AxisX LineColor="64, 64, 64, 64">
-                <LabelStyle Format="{0:ddd d}" />
+                <LabelStyle Format="{MMM d}" />
                 <MajorGrid Enabled="False" />
                 <MinorGrid Enabled="False" />
             </AxisX>
