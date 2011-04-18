@@ -4,7 +4,7 @@
         var statDiffs = new List<object>();
         dynamic previous = stats.Last();
         foreach (var current in stats.Reverse().Skip(1)) {
-            statDiffs.Add(new { Downloads = current.Downloads - previous.Downloads, LogTime = (DateTime)current.LogTime });
+            statDiffs.Add(new { Downloads = Math.Max(0, current.Downloads - previous.Downloads), LogTime = (DateTime)current.LogTime });
             previous = current;
         }
 
