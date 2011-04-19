@@ -1,5 +1,5 @@
 ﻿@{       
-    if (Request["chart"] == "diff") {
+    if (Request["chart"] == "downloadsperhour") {
         var stats = NuGetStatistics.GetStatsHistory(100);
         var statDiffs = new List<object>();
         dynamic previous = stats.Last();
@@ -11,6 +11,20 @@
         new Chart(600, 300, themePath: "DiffChartTemplate.xml")
             .AddSeries(chartType: "Spline", xValue: statDiffs, xField: "LogTime", yValues: statDiffs, yFields: "Downloads")
             .AddTitle("Hourly Downloads")
+            .Write(format: "png");
+    }
+    else if (Request["chart"] == "uploadsperday") {
+        var stats = NuGetStatistics.GetStatsHistory();
+        var statDiffs = new List<object>();
+        dynamic previous = stats.Last();
+        foreach (var current in stats.Reverse().Skip(1)) {
+            statDiffs.Add(new { Uploads = Math.Max(0, current.TotalPackages - previous.TotalPackages), LogTime = (DateTime)current.LogTime });
+            previous = current;
+        }
+
+        new Chart(600, 300, themePath: "ChartTemplate.xml")
+            .AddSeries(chartType: "area", xValue: statDiffs, xField: "LogTime", yValues: statDiffs, yFields: "Uploads")
+            .AddTitle("Daily uploads")
             .Write(format: "png");
     }
     else {

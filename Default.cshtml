@@ -39,12 +39,20 @@
                 </ul>
             </div>
             <div class="clear"></div>
-            <br />
             <div id="charts">
                 <h2>Charts</h2>
-                <img src="viewstats.cshtml?chart=diff" alt="downloads/hour" />
-                <br />
-                <img src="viewstats.cshtml" alt="downloads" />
+                <figure>
+                    <img src="viewstats.cshtml?chart=downloadsperhour" alt="downloads/hour" />
+                    <figcaption>Package downloads per hour</figcaption>
+                </figure>
+                <figure>
+                    <img src="viewstats.cshtml?chart=uploadsperday" alt="downloads" />
+                    <figcaption>Package uploads per day</figcaption>
+                </figure>
+                <figure>
+                    <img src="viewstats.cshtml" alt="downloads" />
+                    <figcaption>Package Downloads</figcaption>
+                </figure>
             </div>
             <div id="tweets">
                 @Twitter.Search("#nuget", 287, 200)

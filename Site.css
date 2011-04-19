@@ -34,7 +34,23 @@ a { color: #00A0E7; }
 }
     #charts h2  {
         color:#555; 
+        margin-bottom: 0;
     }
+    
+    #charts figure  {
+        display: table; 
+        margin: 0 auto;    
+    }
+        
+        figure img {
+            display : table-cell;
+        }
+        
+        figcaption  {
+            text-align: center; 
+            display: table-caption; 
+            font-weight: bold;
+         }
 
 #main {
     min-height:450px;

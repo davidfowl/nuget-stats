@@ -1,4 +1,5 @@
 ﻿$(function () {
+
     var currentLatest = {};
     function getStats() {
         $.post('stats', function (stats) {
@@ -23,7 +24,21 @@
         }, 'json');
     }
 
+    function setupChartShow() {
+        var figures = $('#charts figure').hide();
+        figures.first().show();
+        var i = 0;
+        setInterval(function () {
+            $(figures[i]).fadeOut('slow', function () {
+                i = (i + 1) % figures.length;
+                $(figures[i]).fadeIn('fast');
+            });
+        }, 8000);
+
+    }
+
     getStats();
+    setupChartShow();
 
     function update(element, value) {
         value = value.toString();
