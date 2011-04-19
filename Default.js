@@ -24,21 +24,12 @@
         }, 'json');
     }
 
-    function setupChartShow() {
-        var figures = $('#charts figure').hide();
-        figures.first().show();
-        var i = 0;
-        setInterval(function () {
-            $(figures[i]).fadeOut('slow', function () {
-                i = (i + 1) % figures.length;
-                $(figures[i]).fadeIn('fast');
-            });
-        }, 8000);
-
+    function setupChart() {
+        $('#charts').tabs();
     }
 
     getStats();
-    setupChartShow();
+    setupChart();
 
     function update(element, value) {
         value = value.toString();

@@ -42,15 +42,18 @@ a { color: #00A0E7; }
         margin: 0 auto;    
     }
         
-        figure img {
-            display : table-cell;
+        #charts .ui-widget-content {
+	        border: none;
+        }
+
+        #charts .ui-widget {
+	        font-size: inherit;
         }
         
-        figcaption  {
-            text-align: center; 
-            display: table-caption; 
-            font-weight: bold;
-         }
+        #charts .ui-widget-header {
+	        border: none;
+	        background: none;
+        }
 
 #main {
     min-height:450px;

@@ -41,18 +41,19 @@
             <div class="clear"></div>
             <div id="charts">
                 <h2>Charts</h2>
-                <figure>
-                    <img src="viewstats.cshtml?chart=downloadsperhour" alt="downloads/hour" />
-                    <figcaption>Package downloads per hour</figcaption>
-                </figure>
-                <figure>
-                    <img src="viewstats.cshtml?chart=uploadsperday" alt="downloads" />
-                    <figcaption>Package uploads per day</figcaption>
-                </figure>
-                <figure>
-                    <img src="viewstats.cshtml" alt="downloads" />
-                    <figcaption>Package Downloads</figcaption>
-                </figure>
+                
+                <ul>
+                    <li><a href="#downloadsperhour">Package downloads per hour</a></li>
+                    <li><a href="#uploadsperday">Package uploads per day</a></li>
+                    <li><a href="#downloads">Download trend</a></li>
+                </ul>
+
+                <img id="downloadsperhour" src="viewstats.cshtml?chart=downloadsperhour" alt="downloads/hour" />
+
+                <img id="uploadsperday" src="viewstats.cshtml?chart=uploadsperday" alt="uploads/day" />
+                
+                <img id="downloads" src="viewstats.cshtml" alt="downloads" />
+
             </div>
             <div id="tweets">
                 @Twitter.Search("#nuget", 287, 200)
