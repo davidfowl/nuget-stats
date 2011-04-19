@@ -3,6 +3,7 @@
     <head>
         <title>@Page.Title</title>
         <link href="@Href("Site.css")" rel="stylesheet" type="text/css" />
+        <link type="text/css" rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/flick/jquery-ui.css" />  
         <link rel="shortcut icon" href="@Href("favicon.ico")" />
         <meta name="description" content="@Page.Description" />
         @RenderSection("head", required: false)
@@ -11,6 +12,7 @@
     <body>
         @RenderBody()
         <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.5.min.js"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script> 
         @RenderSection("foot", required: false)
     </body>    
 </html>
