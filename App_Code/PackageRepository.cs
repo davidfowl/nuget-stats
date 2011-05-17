@@ -3,50 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Caching;
 using NuGet;
+using HttpUtility = System.Web.HttpUtility;
 
-public class PackageRepository {
+public static class PackageRepository {
     private static readonly DataServicePackageRepository _repository = new DataServicePackageRepository(new Uri("http://packages.nuget.org/v1/FeedService.svc"));
-    internal static readonly TimeSpan CacheTime = TimeSpan.FromMinutes(5);
-
-    private static IList<DataServicePackage> GetPackages(Cache cache) {
-        return cache.GetOrCreate<IList<DataServicePackage>>("packages", GetPackages, CacheTime);
-    }
-
-    private static IList<DataServicePackage> GetPackages() {
-        return _repository.GetPackages().AsEnumerable().Cast<DataServicePackage>().ToList();
-    }
+    internal static readonly TimeSpan CacheTime = TimeSpan.FromMinutes(2);
 
     public static Statistics GetCurrentStatistics(Cache cache) {
-        var packages = GetPackages(cache);
+        return cache.GetOrCreate<Statistics>("repositoryStats", GetStatisticsInternal, CacheTime);
+    }
+
+    private static Statistics GetStatisticsInternal() {
+        var packages = _repository.GetPackages();
+        var uniquePackages = packages.Cast<DataServicePackage>().Where(p => p.IsLatestVersion).ToList();
+
+        var totalDownloads = uniquePackages.Sum(p => p.DownloadCount);
+        var totalPackagesCount = packages.Count();
+        var uniquePackagesCount = uniquePackages.Count;
+        var latestPackages = uniquePackages.OrderByDescending(p => p.LastUpdated).Take(5);
+        var topPackages = uniquePackages.OrderByDescending(p => p.DownloadCount).Take(5);
 
         return new Statistics {
-            TotalCount = packages.Count,
-            UniqueCount = packages.GroupBy(p => p.Id).Count(),
-            TotalDownloads = packages.GroupBy(p => p.Id).Select(g => g.First().DownloadCount).Sum(),
-            LatestPackages = (from p in packages
-                              orderby p.LastUpdated descending
-                              select new StatsPackage {
-                                  Id = p.Id,
-                                  Version = p.Version,
-                                  Url = FixGalleryUrl(p)
-                              }).Take(5),
-            TopPackages = (from g in packages.GroupBy(p => p.Id)
-                           let downloadCount = g.First().DownloadCount
-                           let latest = (from p in g
-                                         let version = Version.Parse(p.Version)
-                                         orderby version descending
-                                         select p).First()
-                           orderby downloadCount descending
-                           select new StatsPackage {
-                               Id = latest.Id,
-                               DownloadCount = downloadCount,
-                               Url = FixGalleryUrl(latest)
-                           }).Take(5)
+            TotalCount = totalPackagesCount,
+            UniqueCount = uniquePackagesCount,
+            TotalDownloads = totalDownloads,
+            LatestPackages = latestPackages.Select(GetStatsPackage),
+            TopPackages = topPackages.Select(GetStatsPackage)
         };
     }
 
-    private static string FixGalleryUrl(DataServicePackage package) {
-        // Workaround for the gallery url until it is fixed.
-        return "http://nuget.org/List/Packages/" + package.Id + "/" + package.Version.ToString();
+    private static StatsPackage GetStatsPackage(DataServicePackage package) {
+        return new StatsPackage {
+            Id = package.Id,
+            Version = package.Version,
+            DownloadCount = package.DownloadCount,
+            // Workaround for the gallery url until it is fixed.
+            Url = String.Format("http://nuget.org/List/Packages/{0}/{1}", HttpUtility.UrlPathEncode(package.Id), HttpUtility.UrlPathEncode(package.Version.ToString()))
+        };
     }
 }
