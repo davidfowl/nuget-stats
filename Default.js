@@ -20,7 +20,7 @@
             $('#loading').hide();
             $('#main').show();
 
-            setTimeout(getStats, 8000);
+            setTimeout(getStats, 20 * 1000);
         }, 'json');
     }
 
